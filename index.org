@@ -306,6 +306,166 @@ def print_result(result) = puts(result)
 ).call("Tech Talks")
 #+END_SRC
 
+* Concurrencia y paralelismo en Ruby
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+* Ruby Status for a long time
+Servers are Cheap, Devs are expensive
+
+Happy Devs over performance code
+
+#+ATTR_HTML: :class note
+#+BEGIN_QUOTE
+Esto asume que los nucleos van a volverse mas rapidos cada cierto tiempo. Ley de moore ya no se cumple
+
+#+END_QUOTE
+
+* Ractor
+[[https://share.getcloudapp.com/P8u9lB5g][Ractor in usage]]
+
+* Ractor
+Isolated process. Runs in parallel
+#+BEGIN_SRC ruby
+Etc.nprocessors.times do
+  Ractor.new do
+    loop do
+      rand(100000000)
+    end
+  end
+end
+#+END_SRC
+
+* Ractor message passing
+Mailbox
+#+BEGIN_SRC ruby
+ractor = Ractor.new(Ractor.current) do |current|
+  number = Ractor.receive
+  current.send(number * number)
+end
+
+ractor.send(10)
+p Ractor.receive
+#+END_SRC
+
+* Demo
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+#+ATTR_HTML: :class note
+#+BEGIN_QUOTE
+ruby -I . -r lib/ruby_ex.rb examples/01_gen_servers.rb
+ruby -I . -r lib/ruby_ex.rb examples/02_pub_sub.rb
+#+END_QUOTE
+
+* 
+  :PROPERTIES:
+  :FILL:     images/oo.jpeg
+  :TITLE:    white
+  :SLIDE:    contain-image
+  :END:
+
+* Ractor y data inmutable
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+Some problems
+
+* Copied data
+#+BEGIN_SRC ruby
+## Use this example in irb
+msg = 'Hello'
+p msg.object_id
+
+Ractor.new(msg) do |m|
+  p m.object_id
+end
+sleep(0.5) # Only if needed if running the code as script
+#+END_SRC
+
+#+ATTR_HTML: :class note
+#+BEGIN_QUOTE
+Two copies of data. Datos desacoplados pero data duplicada.
+
+Cada ractor crear un nuevo thread nativo. Esto puede generar memory issues
+#+END_QUOTE
+
+* Moved data
+#+BEGIN_SRC ruby
+## Use this example in irb
+msg = 'Hello'
+
+ractor = Ractor.new do
+  p receive
+end
+
+ractor.send(msg, move: true)
+
+sleep(0.5) # Only if needed if running the code as script
+
+puts msg.inspect #can not send any methods to a moved object (Ractor::MovedError
+#+END_SRC
+
+#+ATTR_HTML: :class note
+#+BEGIN_QUOTE
+Good reason, move data and make sure you don't have multiple copies of data
+El problema es que agrega complejidad
+#+END_QUOTE
+
+* Sharable data
+#+BEGIN_SRC ruby
+me = Ractor.make_shareable({name: "Albert", nickname: "Amiguito"})
+p me.object_id
+Ractor.new(me) do |m|
+  p m.object_id
+end
+sleep(0.5) # Only if needed if running the code as script
+#+END_SRC
+
+#+ATTR_HTML: :class note
+#+BEGIN_QUOTE
+Hace data between ractor como compartida. Objecto sera Frozen
+#+END_QUOTE
+
+* Sharable data
+#+BEGIN_SRC ruby
+User = Struct.new(:name, :language)
+me = Ractor.make_shareable(User.new('Steven', %w[Ruby Elixir]))
+p me.object_id
+
+Ractor.new(me) do |user|
+  p user.object_id
+end
+
+me.language.push('PHP') # can't modify frozen Array: ["Ruby", "Elixir"] (FrozenError)
+#+END_SRC
+
+* Sharable data
+#+BEGIN_SRC ruby
+require 'prime'
+
+p Prime.prime?(2)
+
+Ractor.new { Prime.prime?(2) }
+
+sleep(0.5) # Only if needed if running the code as Script
+#+END_SRC
+
+* 
+  :PROPERTIES:
+  :FILL:     images/tweat.jpg
+  :TITLE:    white
+  :SLIDE:    contain-image
+  :END:
+
 
 * Thank You ʕ•ᴥ•ʔ
 :PROPERTIES:
@@ -319,3 +479,4 @@ def print_result(result) = puts(result)
 [fn:2] [[https://www.youtube.com/watch?v=nBtz9IJBO4g][Pattern matching: The gateway to loving Elixir]]
 [fn:3] [[https://youtu.be/wo4eZ2iVIyo][RubyConf 2019 - Pattern Matching - New feature in Ruby 2.7]]
 [fn:4] [[https://docs.ruby-lang.org/en/3.0.0/doc/syntax/pattern_matching_rdoc.html][Pattern matching documentation in Ruby]]
+[fn:5] 

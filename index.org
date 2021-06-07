@@ -23,13 +23,227 @@
 #+LANGUAGE: es
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="theme/css/custom.css" />
 
+* 
+  :PROPERTIES:
+  :FILL:     images/star_wars.jpeg
+  :TITLE:    white
+  :SLIDE:    contain-image
+  :END:
+
+#+ATTR_HTML: :class note
+#+BEGIN_QUOTE
+1977
+
+Two hour drama
+
+Princesa, Androids y la fuerza
+#+END_QUOTE
+
+* 
+  :PROPERTIES:
+  :FILL:     images/fight.jpeg
+  :TITLE:    white
+  :SLIDE:    contain-image
+  :END:
+
+#+ATTR_HTML: :class note
+#+BEGIN_QUOTE
+No es dificil ver la influencia de las peliculas de samurai
+#+END_QUOTE
+
+* 
+  :PROPERTIES:
+  :FILL:     images/hidden_fortress.jpg
+  :TITLE:    white
+  :SLIDE:    contain-image
+  :END:
+
+#+ATTR_HTML: :class note
+#+BEGIN_QUOTE
+Pelicula Hidden Fortress
+
+Akira Kurosawa 1958
+#+END_QUOTE
+
+* 
+  :PROPERTIES:
+  :FILL:     images/The_Magnificent_Seven.jpeg
+  :TITLE:    white
+  :SLIDE:    contain-image
+  :END:
+
+#+ATTR_HTML: :class note
+#+BEGIN_QUOTE
+Otra pelicula influenciada por las peliculas de samurais
+
+The Magnificent Seven es un remake de The Seven samurai
+#+END_QUOTE
+
+* 
+  :PROPERTIES:
+  :FILL:     images/unforgiven.png
+  :TITLE:    white
+  :SLIDE:    contain-image
+  :END:
+
+#+ATTR_HTML: :class note
+#+BEGIN_QUOTE
+Ken watanabe hizo un remake del clasico Unforgiven de Clint Eastwood
+
+Unforgiven 2013 
+#+END_QUOTE
+
+* 
+  :PROPERTIES:
+  :FILL:     images/mandalorian.jpeg
+  :TITLE:    white
+  :SLIDE:    contain-image
+  :END:
+
+#+ATTR_HTML: :class note
+#+BEGIN_QUOTE
+The mandalorian, basada en peliculas del lejano oeste
+
+Mutua inspiracion que resulta en cosas bonitas
+#+END_QUOTE
+
 * Me
 - Egresado de Codeable, 2do Cohort
-- Software Engineer en Able.
+- Software Engineer en Able
   - Ruby on Rails y React
 - 6 años de experiencia con Elixir
-  - Side-Projects y trabajos freelancer.
+  - Side-Projects y trabajos freelancer
 - I ❤️ elixir 
+
+* Ruby
+#+BEGIN_CENTER
+#+ATTR_HTML: :height 330px
+[[file:images/ruby.jpeg]]
+#+END_CENTER
+#+ATTR_HTML: :class note
+#+BEGIN_QUOTE
+Lenguaje orientado a objectos. Yukahiro matsumoto en 1995
+
+Ruby Optimizado para la felicidad del programador
+
+Basado en el principio de minima sorpresa (ergonomico - intuitivo)
+#+END_QUOTE
+
+* Elixir
+#+BEGIN_CENTER
+#+ATTR_HTML: :height 330px
+[[file:images/elixir.png]]
+#+END_CENTER
+
+#+ATTR_HTML: :class note
+#+BEGIN_QUOTE
+Jose Valim - 2011
+
+Programacion funcional con una sintaxis amigable
+#+END_QUOTE
+
+* Ruby -> Elixir
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+* Syntax
+#+BEGIN_SRC ruby
+[
+  "Jose Valim",
+  "Chris McCord"
+].each do |alchemist|
+  puts "#{alchemist} say Hello!"
+end
+#+END_SRC
+
+#+BEGIN_SRC elixir
+[
+  "Jose Valim",
+  "Chris McCord"
+]
+|> Enum.each(fn alchemist -> 
+  IO.puts("#{alchemist} say Hello!")
+end)
+#+END_SRC
+
+* Testing and Tooling
+- minitest/rspec -> ExUnit
+- bundler -> mix
+- rake -> mix
+
+* Rails -> Phoenix
+- MVC
+- Router
+- Channels
+
+#+ATTR_HTML: :class note
+#+BEGIN_QUOTE
+Router
+- Similar DSL
+- Router Phoenix es mas eficiente x pattern matching. 
+- Libro Phoenix menciona que consultoras han hecho millones solo tuneando routers
+#+END_QUOTE
+
+* Phoenix Channels
+#+BEGIN_QUOTE
+Erlang thinks that the web browser is just another Erlang process, which simplifies our programming model, putting everithing into the same conceptual framework.[fn:1]
+
+      -- Joe Armstrong
+#+END_QUOTE
+
+* Elixir -> Ruby
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+* Phoenix -> Rails
+#+BEGIN_CENTER
+#+ATTR_HTML: :height 370px
+[[file:images/hotwire.png]]
+#+END_CENTER
+
+* Pattern Matching (Since 2.7 )
+#+BEGIN_SRC ruby
+person = {
+  name: "Albert Castellano",
+  nickname: "Amiguito"
+}
+person => {name:, task:} # Inline pattern matching is experimental
+# v2.7 job <b>in</b> {name:, task:}
+# v3 job <b>=></b> {name:, task:}
+puts "#{name} have the nickname #{nickname}"
+#+END_SRC
+
+#+ATTR_HTML: :class note
+#+BEGIN_QUOTE
+Referencia [fn:2]
+Referencia [fn:3]
+#+END_QUOTE
+
+* Pattern Matching
+#+BEGIN_SRC ruby
+job1 = {attempts: 1, name: "Albert", task: "make Elixir cool"}
+job2 = {attempts: 4, name: "Albert", task: "make Ruby cool"}
+
+def process_job(job)
+  case job
+  in name:, task:, attempts: attempts <b>if attempts > 2</b>
+    puts "Too many attempts. #{name} can not #{task}"
+  in name:, task:, attempts:
+    puts "#{name} has attemped to #{task} #{attempts} time(s)"
+  end
+end
+
+process_job(job1)
+process_job(job2)
+#+END_SRC
+
+* Pipelines with then
 
 * Thank You ʕ•ᴥ•ʔ
 :PROPERTIES:
@@ -37,3 +251,9 @@
 :ASIDE: right
 :ARTICLE: flexbox vleft auto-fadein
 :END:
+
+* Footnotes
+[fn:1] [[https://pragprog.com/titles/jaerlang2/programming-erlang-2nd-edition/][Programming Erlang]]
+[fn:2] [[https://www.youtube.com/watch?v=nBtz9IJBO4g][Pattern matching: The gateway to loving Elixir]]
+[fn:3] [[https://youtu.be/wo4eZ2iVIyo][RubyConf 2019 - Pattern Matching - New feature in Ruby 2.7]]
+[fn:4] [[https://docs.ruby-lang.org/en/3.0.0/doc/syntax/pattern_matching_rdoc.html][Pattern matching documentation in Ruby]]

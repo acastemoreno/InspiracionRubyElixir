@@ -1,0 +1,39 @@
+* Slide Options                           :noexport:
+# ======= Appear in cover-slide ====================
+#+TITLE: Ruby y Elixir
+#+SUBTITLE: Inspiración mutua
+#+COMPANY: Able
+#+AUTHOR: Albert Castellano Moreno
+#+EMAIL: acastemoreno@gmail.com
+
+# ======= Appear in thank-you-slide ================
+#+GITHUB: http://github.com/acastemoreno
+
+# ======= Appear under each slide ==================
+#+FAVICON: images/elixir.png
+#+ICON: images/elixir.png
+#+HASHTAG: #TechTalks
+
+# ======= Google Analytics =========================
+#+ANALYTICS: ----
+
+# ======= Org settings =========================
+#+EXCLUDE_TAGS: noexport
+#+OPTIONS: toc:nil num:nil ^:nil
+#+LANGUAGE: es
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="theme/css/custom.css" />
+
+* Me
+- Egresado de Codeable, 2do Cohort
+- Software Engineer en Able.
+  - Ruby on Rails y React
+- 6 años de experiencia con Elixir
+  - Side-Projects y trabajos freelancer.
+- I ❤️ elixir 
+
+* Thank You ʕ•ᴥ•ʔ
+:PROPERTIES:
+:SLIDE: thank-you-slide segue
+:ASIDE: right
+:ARTICLE: flexbox vleft auto-fadein
+:END:

@@ -459,6 +459,24 @@ Ractor.new { Prime.prime?(2) }
 sleep(0.5) # Only if needed if running the code as Script
 #+END_SRC
 
+* Sharable data
+#+BEGIN_SRC ruby
+class C
+  class << self
+    attr_accessor :tricky
+  end
+end
+
+C.tricky = 'test'
+
+Ractor.new(C) do |cls|
+  p "I see #{cls}"
+  p "I can't see #{cls.tricky}"
+end
+
+sleep(0.5) # Only if needed if running the code as Script
+#+END_SRC
+
 * 
   :PROPERTIES:
   :FILL:     images/tweat.jpg

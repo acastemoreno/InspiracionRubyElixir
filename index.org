@@ -243,7 +243,69 @@ process_job(job1)
 process_job(job2)
 #+END_SRC
 
+* Pipelines in Elixir
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+
+#+BEGIN_SRC elixir
+swapcase = fn (l) ->
+  case String.upcase(l) do
+    ^l -> 
+      String.downcase(l)
+    _ ->
+      String.upcase(l)
+  end
+end
+
+"Tech Talks"
+  |> String.split("")
+  |> Enum.map(swapcase)
+  |> Enum.join
+  |> String.split()
+  |> Enum.reverse()
+  |> Enum.join(" ")
+  |> IO.puts
+#+END_SRC
+
+
 * Pipelines with then
+#+BEGIN_SRC ruby
+
+"Tech Talks"
+  .then {|phrase| phrase.split("")}
+  .then {|list| list.map {|char| char.swapcase}}
+  .then {|list| list.join}
+  .then {|phrase| phrase.split}
+  .then {|list| list.reverse}
+  .then {|list| list.join(" ") }
+  .then {|phrase| puts phrase}
+#+END_SRC
+
+* Pipelines with then (functional composition)
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+#+BEGIN_SRC ruby
+def split_in_char(phrase) = phrase.split("")
+def swapcase(list) = list.map {|char| char.swapcase}
+def join_chars(chars) = chars.join
+def split_phrase(phrase) = phrase.split
+def reverse_list(list) = list.reverse
+def join_words(words) = words.join(" ")
+def print_result(result) = puts(result)
+
+(
+  method(:split_in_char) \
+  >> method(:swapcase) \
+  >> method(:join_chars) \
+  >> method(:split_phrase) \
+  >> method(:reverse_list) \
+  >> method(:join_words) \
+  >> method(:print_result)
+).call("Tech Talks")
+#+END_SRC
+
 
 * Thank You ʕ•ᴥ•ʔ
 :PROPERTIES:

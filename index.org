@@ -142,6 +142,13 @@ Jose Valim - 2011
 Programacion funcional con una sintaxis amigable
 #+END_QUOTE
 
+* 
+  :PROPERTIES:
+  :FILL:     images/logos.jpeg
+  :TITLE:    white
+  :SLIDE:    contain-image
+  :END:
+
 * Ruby -> Elixir
   :PROPERTIES:
   :SLIDE:    segue dark quote

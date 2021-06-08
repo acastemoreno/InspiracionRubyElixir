@@ -313,12 +313,13 @@ def print_result(result) = puts(result)
 ).call("Tech Talks")
 #+END_SRC
 
-* Concurrencia y paralelismo en Ruby
+* Concurrencia y paralelismo
   :PROPERTIES:
   :SLIDE:    segue dark quote
   :ASIDE:    right bottom
   :ARTICLE:  flexbox vleft auto-fadein
   :END:
+Ruby
 
 * Ruby Status for a long time
 Servers are Cheap, Devs are expensive

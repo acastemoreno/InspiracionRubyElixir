@@ -351,6 +351,13 @@ ractor.send(10)
 p Ractor.receive
 #+END_SRC
 
+* 
+  :PROPERTIES:
+  :FILL:     images/supervision-tree.png
+  :TITLE:    white
+  :SLIDE:    contain-image
+  :END:
+
 * Demo
   :PROPERTIES:
   :SLIDE:    segue dark quote

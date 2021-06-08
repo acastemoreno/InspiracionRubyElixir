@@ -1,5 +1,5 @@
 slides > slide:not(.nobackground):before {
-background: url(../../images/elixir.png) no-repeat 0 50%;
+background: url(../../images/tech_talks.jpeg) no-repeat 0 50%;
 font-size: 12pt;
 content: "#TechTalks";
 position: absolute;

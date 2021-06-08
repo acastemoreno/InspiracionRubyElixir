@@ -10,8 +10,8 @@
 #+GITHUB: http://github.com/acastemoreno
 
 # ======= Appear under each slide ==================
-#+FAVICON: images/elixir.png
-#+ICON: images/elixir.png
+#+FAVICON: images/tech_talks.jpeg
+#+ICON: images/tech_talks.jpeg
 #+HASHTAG: #TechTalks
 
 # ======= Google Analytics =========================
